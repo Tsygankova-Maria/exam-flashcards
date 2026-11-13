@@ -1,0 +1,255 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-from: #eef2ff;
+  --bg-to: #f8fafc;
+  --text: #1e293b;
+  --muted: #64748b;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --front-bg: #ffffff;
+  --back-bg: #4f46e5;
+  --back-text: #ffffff;
+  --shadow: 0 12px 32px rgba(30, 41, 59, 0.18);
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(160deg, var(--bg-from), var(--bg-to));
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 32px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-header h1 {
+  margin: 0 0 6px;
+  font-size: 2rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.app-main {
+  width: 100%;
+  max-width: 720px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.status {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.error-box {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---------- Прогресс ---------- */
+
+.progress-info {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* ---------- Карточка с 3D-переворотом ---------- */
+
+.card-scene {
+  width: 100%;
+  max-width: 640px;
+  height: 340px;
+  perspective: 1200px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: 20px;
+  outline: none;
+}
+
+.card:focus-visible {
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 32px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  text-align: center;
+  overflow: hidden;
+}
+
+.card-front {
+  background: var(--front-bg);
+  color: var(--text);
+}
+
+.card-back {
+  background: var(--back-bg);
+  color: var(--back-text);
+  transform: rotateY(180deg);
+}
+
+.card-label {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  opacity: 0.65;
+}
+
+.card-text {
+  margin: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  font-size: 1.6rem;
+  line-height: 1.45;
+  font-weight: 500;
+  padding-top: 20px;
+  word-break: break-word;
+}
+
+/* ---------- Кнопки ---------- */
+
+.controls {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+  transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(79, 70, 229, 0.45);
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #eef2ff;
+}
+
+@media (max-width: 520px) {
+  .card-scene {
+    height: 300px;
+  }
+
+  .card-text {
+    font-size: 1.3rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.6rem;
+  }
+}
